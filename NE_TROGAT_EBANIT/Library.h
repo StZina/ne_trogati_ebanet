@@ -72,7 +72,7 @@ void InitGame() {
     room[0].p.push_back({ "Туалет", 2 });
     room[0].story = false;
 
-
+    //
     room[1].loc_name = "Бухгалтерия";
     room[1].p.push_back({ "44", 3 });
     room[1].p.push_back({ "Завод", 4 });
