@@ -130,6 +130,7 @@
     <ClCompile Include="NE_TROGAT_EBANIT.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Diolog_text.h" />
     <ClInclude Include="Library.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
