@@ -9,6 +9,7 @@ int main() {
     srand(time(0));
     one();
     InitGame();
+    InitGirls();
     start();
     game();
 }

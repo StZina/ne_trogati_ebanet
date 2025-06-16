@@ -53,6 +53,13 @@ struct location_ {
     bool dis_shown = false;
 };
 
+struct Girl {
+    string name;
+    int love_level;
+
+    Girl(string n, int love) : name(n), love_level(love) {}
+};
+
 struct info {
     int watch = 1;
     string name;
@@ -63,15 +70,8 @@ struct info {
     int wallet = 1000;
 };
 
-struct love {
-    int receptionist = 0;
-    int accountant = 50;
-    int engineer = 50;
-    int boss = 20;
-    int komusisi = 80;
-};
+vector<Girl> girls;
 
-love girl_love;
 info player;
 vector<product_> coffee_machine;
 location_ room[5];
@@ -210,7 +210,7 @@ void intervio2() {
 
         if (choice == 1) {
             cout << "Комусиси-тян делится своими проблемами. Вы решаете остаться с ней и проваливаете собеседование.\n";
-            girl_love.komusisi += 20;
+            girls[4].love_level += 20;
         }
         else {
             cout << "Вы идете на собеседование в хорошем настроении. Собеседование отменено — вас всё равно берут!\n";
@@ -223,15 +223,14 @@ void intervio2() {
     player.item_p.push_back(item_::headphones);
     cout << "У вас есть наушники.\n";
 }
-void show_love_levels() {
-    cout << "Интерес девушек\n";
-    cout << "Комусиси-тян: " << girl_love.komusisi << endl;
-    cout << "Ресепшен: " << girl_love.receptionist << endl;
-    cout << "Бухгалтерия: " << girl_love.accountant << endl;
-    cout << "Начальница: " << girl_love.boss << endl;
-    cout << "Инженер: " << girl_love.engineer << endl;
-
+void InitGirls() {
+    girls.push_back(Girl("Ресепшен", 0));
+    girls.push_back(Girl("Бухгалтерия", 50));
+    girls.push_back(Girl("Инженер", 50));
+    girls.push_back(Girl("Начальница", 20));
+    girls.push_back(Girl("Комусиси-тян", 80));
 }
+
 void InitGame() {
     room[0].loc_name = "Ресепшен";
     room[0].dis = "Сегодня на ресепшене меня встретила незнакомка...\n";
@@ -395,9 +394,7 @@ void game() {
                 }
             }
         }
-        if (chouse == "интерес") {
-            show_love_levels();
-        }
+      
 
 
         else if (chouse == "отдай") {
