@@ -43,6 +43,7 @@ string items_item[] = { "наушники", "трусики", "чашка", "ж�
 struct portal_ {
     string portal_name;
     int target;
+    portal_(string a, int b) : portal_name(a), target(b) {}
 };
 
 struct location_ {
@@ -51,16 +52,12 @@ struct location_ {
     vector<portal_> p;
     vector<item_> item_l;
     bool dis_shown = false;
+   
 };
 
-struct Girl {
-    string name;
-    int love_level;
+class info {
 
-    Girl(string n, int love) : name(n), love_level(love) {}
-};
-
-struct info {
+public:
     int watch = 1;
     string name;
     int current_loc = 0;
@@ -68,14 +65,41 @@ struct info {
     bool headphones_on = true;
     vector<item_> item_p;
     int wallet = 1000;
+
+    info() {}
+
+    info(int w, int life, bool head, int loc) : watch(w), life(life), headphones_on(head), current_loc(loc) {}
+
+    void print() {
+
+        cout << watch << "\n" << life << "\n" << headphones_on << "\n" << current_loc << "\n";
+
+    }
+
 };
 
-vector<Girl> girls;
+class Girl : public info {
+public:
 
+    string name;
+    int love_level;
+
+    Girl(string n, int love , int w, int life, bool head, int loc) : info (w, life, head, loc){
+    
+        this->name = n;
+        love_level = love;
+
+    }
+
+};
+
+
+vector<Girl> girls;
+vector <portal_> port;
 info player;
 vector<product_> coffee_machine;
 location_ room[5];
-void show_love_levels();
+
 void InitGame();
 void game();
 void intervio();
@@ -86,6 +110,9 @@ void start();
 
 
 void start() {
+    
+    Girl TOMA("TOMA", 3, 2, false, false, 1);
+    TOMA.print();
 
     cout << txt.narativ[0];
    
@@ -223,15 +250,21 @@ void intervio2() {
     player.item_p.push_back(item_::headphones);
     cout << "У вас есть наушники.\n";
 }
-void InitGirls() {
-    girls.push_back(Girl("Ресепшен", 0));
-    girls.push_back(Girl("Бухгалтерия", 50));
-    girls.push_back(Girl("Инженер", 50));
-    girls.push_back(Girl("Начальница", 20));
-    girls.push_back(Girl("Комусиси-тян", 80));
-}
+//void InitGirls() {
+//    girls.push_back(Girl("Ресепшен", 0));
+//    girls.push_back(Girl("Бухгалтерия", 50));
+//    girls.push_back(Girl("Инженер", 50));
+//    girls.push_back(Girl("Начальница", 20));
+//    girls.push_back(Girl("Комусиси-тян", 80));
+//}
 
 void InitGame() {
+    port.push_back(portal_("Ресепшен", 0));
+    port.push_back(portal_("69", 1));
+    port.push_back(portal_("Туалет", 2));
+    port.push_back(portal_("44", 3));
+    port.push_back(portal_("Завод", 4));
+    
     room[0].loc_name = "Ресепшен";
     room[0].dis = "Сегодня на ресепшене меня встретила незнакомка...\n";
     room[0].p.push_back({ "69", 1 });
@@ -260,14 +293,15 @@ void InitGame() {
     room[3].item_l.push_back(item_::cup);
     room[3].item_l.push_back(item_::notebook);
     room[4].item_l.push_back(item_::magazine);
-}
 
-void coffee_automat() {
-    coffee_machine.clear();
+    //coffee_machine.clear();
     coffee_machine.push_back({ "Эспрессо", 150 });
     coffee_machine.push_back({ "Американо", 120 });
     coffee_machine.push_back({ "Капучино", 180 });
 
+}
+
+void coffee_automat() {
 
     int choice;
     while (player.wallet > 0) {
@@ -471,6 +505,7 @@ void game() {
 }
 
 // (СТРУКТУРА )ВЕКТОР СУЧКИ , ОПИСАНИЕ, ФЛАГИ
+// наследование 
 
 
 
