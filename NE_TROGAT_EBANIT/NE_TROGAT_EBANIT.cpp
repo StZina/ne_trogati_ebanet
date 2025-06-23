@@ -1,16 +1,6 @@
 ﻿#include "Diolog_text.h"
 #include "Library.h"
 
-int test() {
-    int a = 6;
-    if (a == 5) {
-        return 15;
-    
-    }
-    else {
-        return a;
-    }
-}
 
 int main() {
     setlocale(LC_ALL, "Russian");

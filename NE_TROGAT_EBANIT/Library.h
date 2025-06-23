@@ -1,6 +1,4 @@
-﻿#pragma once
-
-#include <iostream>
+﻿#include <iostream>
 #include <string>
 #include <vector>
 #include <random>
@@ -26,6 +24,21 @@ string to_lower(string str) {
     transform(str.begin(), str.end(), str.begin(), ::tolower);
     return str;
 }
+
+class Hero {
+public:
+    string name;
+    int current_loc = 0;
+    int wallet = 1000;
+    vector<item_> item_p;
+    bool headphones_on = true;
+
+    Hero() {}
+
+    Hero(string name, int loc = 0, int wallet = 1000, bool headphones = true)
+        : name(name), current_loc(loc), wallet(wallet), headphones_on(headphones) {
+    }
+};
 
 enum class item_ {
     headphones,
@@ -55,50 +68,39 @@ struct location_ {
    
 };
 
-class info {
-
+class Player : public Hero {
 public:
     int watch = 1;
-    string name;
-    int current_loc = 0;
     bool life = true;
-    bool headphones_on = true;
-    vector<item_> item_p;
-    int wallet = 1000;
 
-    info() {}
+    Player() {}
 
-    info(int w, int life, bool head, int loc) : watch(w), life(life), headphones_on(head), current_loc(loc) {}
+    Player(string name, int watch, bool life, int loc = 0, bool headphones = true)
+        : Hero(name, loc, 1000, headphones), watch(watch), life(life) {
+    }
 
     void print() {
-
         cout << watch << "\n" << life << "\n" << headphones_on << "\n" << current_loc << "\n";
-
     }
-
 };
 
-class Girl : public info {
+
+
+class Girl : public Hero {
 public:
+    int love_level = 0;
 
-    string name;
-    int love_level;
-
-    Girl(string n, int love , int w, int life, bool head, int loc) : info (w, life, head, loc){
-    
-        this->name = n;
-        love_level = love;
-
+    Girl(string name, int love, int loc = 0)
+        : Hero(name, loc), love_level(love) {
     }
-
 };
 
 
 vector<Girl> girls;
 vector <portal_> port;
-info player;
 vector<product_> coffee_machine;
 location_ room[5];
+Player player;
 
 void InitGame();
 void game();
@@ -110,9 +112,15 @@ void start();
 
 
 void start() {
+
+    player = Player("ИмяИгрока", 1, true);
+
+    girls.push_back(Girl("Ресепшен", 0, 0));
+    girls.push_back(Girl("Бухгалтерия", 50, 1));
+    girls.push_back(Girl("Инженер", 50, 4));
+    girls.push_back(Girl("Начальница", 20, 3));
+    girls.push_back(Girl("Комусиси-тян", 80, 3));
     
-    Girl TOMA("TOMA", 3, 2, false, false, 1);
-    TOMA.print();
 
     cout << txt.narativ[0];
    
